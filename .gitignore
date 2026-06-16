@@ -1,0 +1,32 @@
+# Service account keys - NEVER commit these!
+*.json
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.Python
+venv/
+.venv/
+*.egg-info/
+
+# Streamlit
+.streamlit/secrets.toml
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Environment
+.env
+.env.local
+
+# Backup files
+*.bak
+*.backup
+*_BACKUP_*
+*_OLD_*
