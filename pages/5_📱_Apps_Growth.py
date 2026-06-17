@@ -1,9 +1,9 @@
 """📱 Apps Growth Dashboard — NEW Installs
 
 GA4 UI VERIFIED NUMBERS (28 days):
-   🤖 Android Organic: 1,656 (Play Store 1,626 + Google 30)
-   🍎 iOS Total New: 5,530
-   📊 Combined: 7,186
+   🤖 Android Organic: 801 (Play Store 771 + Google 30)
+   🍎 iOS Total New: 3,002
+   📊 Combined: 3,803
 
 UPDATE WEEKLY:
    1. GA4 → Reports → Acquisition → User acquisition
@@ -23,18 +23,18 @@ from datetime import date, timedelta, datetime
 
 GA4_UI_NUMBERS = {
     "period_days": 28,
-    "end_date": "2026-05-17",
-    "start_date": "2026-04-19",
+    "end_date": "2026-06-16",
+    "start_date": "2026-05-21",
     
     # Android - from GA4 UI with Platform=Android filter
-    "android_play_store_organic": 1626,  # google-play / organic
+    "android_play_store_organic": 771,   # google-play / organic
     "android_google_organic": 30,         # google / organic
-    "android_total_new": 2569,            # All sources combined
+    "android_total_new": 1175,            # All sources combined
     
     # iOS - from GA4 UI with Platform=iOS filter  
-    "ios_total_new": 5530,                # All sources (ATT blocks attribution)
+    "ios_total_new": 3002,                # All sources (ATT blocks attribution)
     
-    "last_verified": "2026-05-17",
+    "last_verified": "2026-06-17",
 }
 
 GA4_UI_NUMBERS["android_total_organic"] = (

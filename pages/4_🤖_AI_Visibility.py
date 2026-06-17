@@ -1,4 +1,6 @@
-"""AI Visibility Dashboard - Track GEO (Generative Engine Optimization) performance."""
+"""AI Visibility Dashboard - Track GEO (Generative Engine Optimization) performance.
+FIXED: Date picker UX + dark calendar popup styling.
+"""
 import streamlit as st
 import pandas as pd
 import plotly.express as px
@@ -17,7 +19,7 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-# Premium CSS styling
+# Premium CSS styling with FIXED date picker
 st.markdown("""
 <style>
     /* Hide Streamlit branding AND deploy button AND header */
@@ -122,17 +124,15 @@ st.markdown("""
     .stMarkdown { color: white; }
     h1, h2, h3, h4, h5, h6 { color: white !important; }
     
-    /* === SIDEBAR FIXES === */
+    /* === SIDEBAR === */
     section[data-testid="stSidebar"] {
         background: linear-gradient(180deg, #1a1538 0%, #2d2752 100%) !important;
     }
     
-    /* Sidebar all text white */
     section[data-testid="stSidebar"] * {
         color: white !important;
     }
     
-    /* Sidebar headers */
     section[data-testid="stSidebar"] h1,
     section[data-testid="stSidebar"] h2,
     section[data-testid="stSidebar"] h3 {
@@ -140,7 +140,6 @@ st.markdown("""
         font-weight: 700 !important;
     }
     
-    /* Sidebar labels */
     section[data-testid="stSidebar"] label {
         color: rgba(255,255,255,0.85) !important;
         font-weight: 600 !important;
@@ -196,8 +195,146 @@ st.markdown("""
         border-color: rgba(255,255,255,0.15) !important;
     }
     
-    /* Date input in sidebar */
+    /* ==================================== */
+    /* 🎨 FIXED DATE INPUT STYLING          */
+    /* ==================================== */
+    
+    /* Date input field in sidebar - DARK theme */
+    section[data-testid="stSidebar"] [data-testid="stDateInput"] {
+        background-color: transparent !important;
+    }
+    
+    section[data-testid="stSidebar"] [data-testid="stDateInput"] > div {
+        background-color: rgba(255,255,255,0.1) !important;
+        border: 1px solid rgba(255,255,255,0.2) !important;
+        border-radius: 8px !important;
+    }
+    
     section[data-testid="stSidebar"] [data-testid="stDateInput"] input {
+        background-color: transparent !important;
+        color: white !important;
+        border: none !important;
+        font-weight: 500 !important;
+        font-size: 14px !important;
+    }
+    
+    section[data-testid="stSidebar"] [data-testid="stDateInput"] input::placeholder {
+        color: rgba(255,255,255,0.5) !important;
+    }
+    
+    /* Date input calendar icon */
+    section[data-testid="stSidebar"] [data-testid="stDateInput"] svg {
+        fill: rgba(255,255,255,0.7) !important;
+    }
+    
+    /* Date input focus state */
+    section[data-testid="stSidebar"] [data-testid="stDateInput"] > div:focus-within {
+        border-color: #a78bfa !important;
+        box-shadow: 0 0 0 2px rgba(167,139,250,0.2) !important;
+    }
+    
+    /* ==================================== */
+    /* 🗓️ CALENDAR POPUP - DARK THEME       */
+    /* ==================================== */
+    
+    /* Calendar popup container */
+    [data-baseweb="calendar"],
+    [data-baseweb="datepicker"] {
+        background-color: #1a1538 !important;
+        color: white !important;
+        border: 1px solid rgba(167,139,250,0.3) !important;
+        border-radius: 12px !important;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.5) !important;
+    }
+    
+    /* All calendar text */
+    [data-baseweb="calendar"] * {
+        color: white !important;
+        border-color: rgba(255,255,255,0.1) !important;
+    }
+    
+    /* Calendar headers (Mon, Tue, etc.) */
+    [data-baseweb="calendar"] [role="presentation"] {
+        color: rgba(255,255,255,0.5) !important;
+        background-color: transparent !important;
+    }
+    
+    /* Calendar day buttons */
+    [data-baseweb="calendar"] [role="gridcell"] button,
+    [data-baseweb="calendar"] [role="button"] {
+        color: white !important;
+        background-color: transparent !important;
+        border-radius: 6px !important;
+        transition: background-color 0.2s !important;
+    }
+    
+    /* Hover state on day buttons */
+    [data-baseweb="calendar"] [role="gridcell"] button:hover {
+        background-color: rgba(167,139,250,0.3) !important;
+        color: white !important;
+    }
+    
+    /* Selected date */
+    [data-baseweb="calendar"] [aria-selected="true"],
+    [data-baseweb="calendar"] [aria-pressed="true"] {
+        background-color: #a78bfa !important;
+        color: white !important;
+        font-weight: 700 !important;
+    }
+    
+    /* Today indicator */
+    [data-baseweb="calendar"] [aria-current="date"] {
+        background-color: rgba(167,139,250,0.2) !important;
+        color: #c4b5fd !important;
+        border: 1px solid #a78bfa !important;
+    }
+    
+    /* Disabled dates (outside min/max) */
+    [data-baseweb="calendar"] [aria-disabled="true"] {
+        color: rgba(255,255,255,0.2) !important;
+        background-color: transparent !important;
+    }
+    
+    /* Range selection (between start and end) */
+    [data-baseweb="calendar"] [data-range-end="true"],
+    [data-baseweb="calendar"] [data-range-start="true"] {
+        background-color: #a78bfa !important;
+        color: white !important;
+    }
+    
+    [data-baseweb="calendar"] [data-range="true"] {
+        background-color: rgba(167,139,250,0.25) !important;
+        color: white !important;
+    }
+    
+    /* Month/year header */
+    [data-baseweb="calendar"] [role="heading"] {
+        color: white !important;
+        font-weight: 700 !important;
+        font-size: 14px !important;
+    }
+    
+    /* Navigation arrows (prev/next month) */
+    [data-baseweb="calendar"] button[aria-label*="Previous"],
+    [data-baseweb="calendar"] button[aria-label*="Next"] {
+        background-color: transparent !important;
+        color: white !important;
+        border-radius: 6px !important;
+    }
+    
+    [data-baseweb="calendar"] button[aria-label*="Previous"]:hover,
+    [data-baseweb="calendar"] button[aria-label*="Next"]:hover {
+        background-color: rgba(167,139,250,0.3) !important;
+    }
+    
+    /* Navigation arrow SVG */
+    [data-baseweb="calendar"] button svg {
+        fill: white !important;
+    }
+    
+    /* Month/year dropdown selectors in calendar */
+    [data-baseweb="calendar"] select,
+    [data-baseweb="calendar"] [role="combobox"] {
         background-color: rgba(255,255,255,0.1) !important;
         color: white !important;
         border: 1px solid rgba(255,255,255,0.2) !important;
@@ -299,8 +436,7 @@ with st.sidebar:
     st.markdown("---")
     
     # ============================================
-    # 🆕 FIXED COMPARISON DROPDOWN
-    # Only proper comparison options (no date pickers)
+    # COMPARISON DROPDOWN - 4 clean options
     # ============================================
     st.markdown("### ⚖️ Comparison")
     comparison_option = st.selectbox(
@@ -319,9 +455,7 @@ with st.sidebar:
     
     custom_compare_dates = None
     
-    # Show custom comparison date picker if selected
     if comparison_option == "Custom range":
-        # Default to previous period as starting point
         default_compare_end = start_date - timedelta(days=1)
         default_compare_start = default_compare_end - timedelta(days=period_days)
         
@@ -335,11 +469,9 @@ with st.sidebar:
     
     # Calculate comparison range
     if comparison_option == "Previous period":
-        # Same length as main period, ending day before main period starts
         compare_end = start_date - timedelta(days=1)
         compare_start = compare_end - timedelta(days=period_days)
     elif comparison_option == "Previous year":
-        # Same dates, one year earlier
         compare_start = start_date - timedelta(days=365)
         compare_end = end_date - timedelta(days=365)
     elif comparison_option == "Custom range" and custom_compare_dates:
@@ -374,9 +506,7 @@ st.markdown(f"""
 # === FILTER DATA ===
 mask = (full_data_all['date'].dt.date >= start_date) & (full_data_all['date'].dt.date <= end_date)
 filtered_data_all = full_data_all[mask].copy()
-# Session-level data (no page_path) for accurate KPIs
 filtered_data = filtered_data_all[filtered_data_all['sessions'] > 0].copy()
-# Page-level data (with page_path) for top pages table
 filtered_pages = filtered_data_all[filtered_data_all['page_path'] != ''].copy()
 
 if compare_start and compare_end:
@@ -393,10 +523,6 @@ if filtered_data.empty:
         <p style="color: rgba(255,255,255,0.7); margin-bottom: 16px;">
             No AI assistants (ChatGPT, Perplexity, etc.) sent visitors to your site between<br>
             <strong style="color: #c4b5fd;">{start_date.strftime('%B %d, %Y')} → {end_date.strftime('%B %d, %Y')}</strong>
-        </p>
-        <p style="color: rgba(255,255,255,0.5); font-size: 13px;">
-            Try expanding your date range to see historical AI traffic patterns.<br>
-            Your site received AI traffic between May 2025 - February 2026.
         </p>
     </div>
     """, unsafe_allow_html=True)
@@ -539,7 +665,6 @@ if not filtered_data.empty:
     monthly_data['month'] = monthly_data['date'].dt.to_period('M').dt.to_timestamp()
     monthly_trend = monthly_data.groupby(['month', 'ai_platform'])['sessions'].sum().reset_index()
     
-    # Create complete month range
     all_months = pd.date_range(
         start=pd.Timestamp(start_date).to_period('M').to_timestamp(),
         end=pd.Timestamp(end_date).to_period('M').to_timestamp(),
@@ -636,4 +761,4 @@ else:
 
 # === FOOTER ===
 st.markdown("---")
-st.caption(f"Data: GA4 Property 479753377 | Updated daily at 6 AM UTC | AI sources tracked: ChatGPT, Perplexity, Claude, Gemini, Copilot, Bing Chat")
+st.caption(f"Data: GA4 (Website + Mobile App) | Updated daily at 6 AM UTC | AI sources: ChatGPT, Perplexity, Claude, Gemini, Copilot, Bing Chat, Pi, Poe, Character.AI, Grok, DeepSeek, Mistral, Hugging Face, and more")
