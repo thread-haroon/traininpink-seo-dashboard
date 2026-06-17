@@ -91,110 +91,127 @@ st.markdown("""
     [data-baseweb="popover"] [role="option"]:hover { background-color: #ede9fe !important; }
     section[data-testid="stSidebar"] hr { border-color: rgba(255,255,255,0.1) !important; }
     [data-testid="stDataFrame"] [role="cell"], [data-testid="stDataFrame"] [role="columnheader"] { text-align: center !important; }
+    /* ==================================== */
+    /* CALENDAR POPUP - DARK */
+
 
     /* ==================================== */
-    /* 🎨 FIXED DATE INPUT - DARK THEME     */
+    /* DATE INPUT BOX - WHITE BG, BLACK TEXT */
     /* ==================================== */
     section[data-testid="stSidebar"] [data-testid="stDateInput"] {
         background-color: transparent !important;
     }
     section[data-testid="stSidebar"] [data-testid="stDateInput"] > div {
-        background-color: rgba(255,255,255,0.08) !important;
-        border: 1px solid rgba(255,255,255,0.15) !important;
+        background-color: white !important;
+        border: 1px solid rgba(0,0,0,0.15) !important;
         border-radius: 8px !important;
     }
     section[data-testid="stSidebar"] [data-testid="stDateInput"] input {
-        background-color: transparent !important;
-        color: white !important;
+        background-color: white !important;
+        color: #1a1538 !important;
         border: none !important;
-        font-weight: 500 !important;
+        font-weight: 600 !important;
         font-size: 14px !important;
     }
     section[data-testid="stSidebar"] [data-testid="stDateInput"] input::placeholder {
-        color: rgba(255,255,255,0.5) !important;
+        color: rgba(26,21,56,0.5) !important;
     }
     section[data-testid="stSidebar"] [data-testid="stDateInput"] svg {
-        fill: rgba(255,255,255,0.7) !important;
+        fill: #1a1538 !important;
     }
     section[data-testid="stSidebar"] [data-testid="stDateInput"] > div:focus-within {
         border-color: #60a5fa !important;
         box-shadow: 0 0 0 2px rgba(96,165,250,0.2) !important;
     }
-    /* CALENDAR POPUP - DARK */
+    
+    /* ==================================== */
+    /* CALENDAR POPUP - CLEAN WHITE          */
+    /* ==================================== */
+    div[data-baseweb="calendar"],
+    div[data-baseweb="datepicker"],
     [data-baseweb="calendar"],
     [data-baseweb="datepicker"] {
-        background-color: #0f1729 !important;
-        color: white !important;
-        border: 1px solid rgba(96,165,250,0.3) !important;
+        background-color: white !important;
+        background: white !important;
+        color: #1a1538 !important;
+        border: 1px solid #e5e7eb !important;
         border-radius: 12px !important;
-        box-shadow: 0 8px 32px rgba(0,0,0,0.5) !important;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.3) !important;
     }
-    [data-baseweb="calendar"] * {
-        color: white !important;
-        border-color: rgba(255,255,255,0.1) !important;
+    [data-baseweb="calendar"] *,
+    [data-baseweb="datepicker"] * {
+        color: #1a1538 !important;
+        background-color: transparent !important;
     }
     [data-baseweb="calendar"] [role="presentation"] {
-        color: rgba(255,255,255,0.5) !important;
-        background-color: transparent !important;
+        color: #6b7280 !important;
+        font-weight: 600 !important;
     }
     [data-baseweb="calendar"] [role="gridcell"] button,
     [data-baseweb="calendar"] [role="button"] {
-        color: white !important;
+        color: #1a1538 !important;
         background-color: transparent !important;
         border-radius: 6px !important;
-        transition: background-color 0.2s !important;
+        font-weight: 500 !important;
+        border: none !important;
     }
     [data-baseweb="calendar"] [role="gridcell"] button:hover {
-        background-color: rgba(96,165,250,0.3) !important;
-        color: white !important;
+        background-color: #dbeafe !important;
+        color: #2563eb !important;
     }
     [data-baseweb="calendar"] [aria-selected="true"],
     [data-baseweb="calendar"] [aria-pressed="true"] {
-        background-color: #60a5fa !important;
+        background-color: #2563eb !important;
         color: white !important;
         font-weight: 700 !important;
     }
+    [data-baseweb="calendar"] [aria-selected="true"] *,
+    [data-baseweb="calendar"] [aria-pressed="true"] * {
+        color: white !important;
+    }
     [data-baseweb="calendar"] [aria-current="date"] {
-        background-color: rgba(96,165,250,0.2) !important;
-        color: #93c5fd !important;
-        border: 1px solid #60a5fa !important;
+        background-color: #dbeafe !important;
+        color: #1e40af !important;
+        border: 1px solid #2563eb !important;
+        font-weight: 700 !important;
     }
     [data-baseweb="calendar"] [aria-disabled="true"] {
-        color: rgba(255,255,255,0.2) !important;
-        background-color: transparent !important;
+        color: #d1d5db !important;
     }
     [data-baseweb="calendar"] [data-range-end="true"],
     [data-baseweb="calendar"] [data-range-start="true"] {
-        background-color: #60a5fa !important;
-        color: white !important;
-    }
-    [data-baseweb="calendar"] [data-range="true"] {
-        background-color: rgba(96,165,250,0.25) !important;
-        color: white !important;
-    }
-    [data-baseweb="calendar"] [role="heading"] {
+        background-color: #2563eb !important;
         color: white !important;
         font-weight: 700 !important;
-        font-size: 14px !important;
+    }
+    [data-baseweb="calendar"] [data-range="true"] {
+        background-color: #dbeafe !important;
+        color: #1a1538 !important;
+    }
+    [data-baseweb="calendar"] [role="heading"] {
+        color: #1a1538 !important;
+        font-weight: 700 !important;
+        font-size: 15px !important;
     }
     [data-baseweb="calendar"] button[aria-label*="Previous"],
     [data-baseweb="calendar"] button[aria-label*="Next"] {
         background-color: transparent !important;
-        color: white !important;
-        border-radius: 6px !important;
+        color: #1a1538 !important;
+        border: none !important;
     }
     [data-baseweb="calendar"] button[aria-label*="Previous"]:hover,
     [data-baseweb="calendar"] button[aria-label*="Next"]:hover {
-        background-color: rgba(96,165,250,0.3) !important;
+        background-color: #f3f4f6 !important;
     }
     [data-baseweb="calendar"] button svg {
-        fill: white !important;
+        fill: #1a1538 !important;
     }
     [data-baseweb="calendar"] select,
     [data-baseweb="calendar"] [role="combobox"] {
-        background-color: rgba(255,255,255,0.1) !important;
-        color: white !important;
-        border: 1px solid rgba(255,255,255,0.2) !important;
+        background-color: white !important;
+        color: #1a1538 !important;
+        border: 1px solid #e5e7eb !important;
+        font-weight: 600 !important;
     }
 
 </style>
@@ -779,6 +796,5 @@ if not events_wider.empty:
             height=380, margin=dict(l=0, r=0, t=60, b=0),
         )
         st.plotly_chart(fig, use_container_width=True)
-
 
 
