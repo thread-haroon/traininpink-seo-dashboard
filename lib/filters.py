@@ -55,17 +55,12 @@ BING_PRESET_RANGES = {
     "Custom": None,
 }
 
+# CLEAN comparison options - only 4 options (industry standard)
 COMPARISON_OPTIONS = [
-    "No comparison",
     "Previous period",
-    "Year over year",
-    "Last 7 days",
-    "Last 30 days",
-    "Last 3 months",
-    "Last 6 months",
-    "Last 12 months",
-    "Last 24 months",
+    "Previous year",
     "Custom range",
+    "No comparison",
 ]
 
 FEATURED_COUNTRIES = ["ita", "gbr", "are", "usa"]
@@ -102,22 +97,10 @@ def _compute_comparison_range(current, mode, custom_start=None, custom_end=None,
         prev_end = current.start - timedelta(days=1)
         prev_start = prev_end - timedelta(days=days - 1)
         return DateRange(start=prev_start, end=prev_end)
-    if mode == "Year over year":
+    if mode == "Previous year":
         prev_start = current.start - relativedelta(years=1)
         prev_end = current.end - relativedelta(years=1)
         return DateRange(start=prev_start, end=prev_end)
-    days_map = {
-        "Last 7 days": 7,
-        "Last 30 days": 30,
-        "Last 3 months": 90,
-        "Last 6 months": 180,
-        "Last 12 months": 365,
-        "Last 24 months": 730,
-    }
-    if mode in days_map:
-        end = _today_minus(lag_days)
-        start = end - timedelta(days=days_map[mode] - 1)
-        return DateRange(start=start, end=end)
     if mode == "Custom range" and custom_start and custom_end:
         return DateRange(start=custom_start, end=custom_end)
     return None
@@ -156,8 +139,9 @@ def render_date_filters(key_prefix="main", preset_dict=None, default_index=0, la
     comparison_mode = st.sidebar.selectbox(
         "Compare against",
         options=COMPARISON_OPTIONS,
-        index=1,
+        index=0,  # Default: Previous period
         key=key_prefix + "_comparison",
+        help="Previous period: same length ending day before main period. Previous year: same dates one year ago."
     )
     custom_comp_start = custom_comp_end = None
     if comparison_mode == "Custom range":
