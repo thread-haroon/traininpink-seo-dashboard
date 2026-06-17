@@ -196,148 +196,136 @@ st.markdown("""
     }
     
     /* ==================================== */
-    /* 🎨 FIXED DATE INPUT STYLING          */
+    /* 🎨 DATE INPUT - WHITE BOX, BLACK TEXT */
     /* ==================================== */
-    
-    /* Date input field in sidebar - DARK theme */
     section[data-testid="stSidebar"] [data-testid="stDateInput"] {
         background-color: transparent !important;
     }
-    
     section[data-testid="stSidebar"] [data-testid="stDateInput"] > div {
-        background-color: rgba(255,255,255,0.1) !important;
-        border: 1px solid rgba(255,255,255,0.2) !important;
+        background-color: white !important;
+        border: 1px solid rgba(255,255,255,0.3) !important;
         border-radius: 8px !important;
     }
-    
     section[data-testid="stSidebar"] [data-testid="stDateInput"] input {
-        background-color: transparent !important;
-        color: white !important;
+        background-color: white !important;
+        color: #1a1538 !important;
         border: none !important;
-        font-weight: 500 !important;
+        font-weight: 600 !important;
         font-size: 14px !important;
     }
-    
     section[data-testid="stSidebar"] [data-testid="stDateInput"] input::placeholder {
-        color: rgba(255,255,255,0.5) !important;
+        color: rgba(26,21,56,0.5) !important;
     }
-    
-    /* Date input calendar icon */
     section[data-testid="stSidebar"] [data-testid="stDateInput"] svg {
-        fill: rgba(255,255,255,0.7) !important;
+        fill: #1a1538 !important;
     }
-    
-    /* Date input focus state */
     section[data-testid="stSidebar"] [data-testid="stDateInput"] > div:focus-within {
         border-color: #a78bfa !important;
         box-shadow: 0 0 0 2px rgba(167,139,250,0.2) !important;
     }
     
     /* ==================================== */
-    /* 🗓️ CALENDAR POPUP - DARK THEME       */
+    /* 🎨 CALENDAR POPUP - CLEAN WHITE       */
     /* ==================================== */
-    
-    /* Calendar popup container */
     [data-baseweb="calendar"],
     [data-baseweb="datepicker"] {
-        background-color: #1a1538 !important;
-        color: white !important;
-        border: 1px solid rgba(167,139,250,0.3) !important;
+        background-color: white !important;
+        color: #1a1538 !important;
+        border: 1px solid #e5e7eb !important;
         border-radius: 12px !important;
-        box-shadow: 0 8px 32px rgba(0,0,0,0.5) !important;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.3) !important;
+        font-family: -apple-system, BlinkMacSystemFont, sans-serif !important;
     }
     
-    /* All calendar text */
     [data-baseweb="calendar"] * {
-        color: white !important;
-        border-color: rgba(255,255,255,0.1) !important;
+        color: #1a1538 !important;
+        border-color: transparent !important;
     }
     
-    /* Calendar headers (Mon, Tue, etc.) */
     [data-baseweb="calendar"] [role="presentation"] {
-        color: rgba(255,255,255,0.5) !important;
+        color: #6b7280 !important;
         background-color: transparent !important;
+        font-weight: 600 !important;
+        font-size: 12px !important;
     }
     
-    /* Calendar day buttons */
     [data-baseweb="calendar"] [role="gridcell"] button,
     [data-baseweb="calendar"] [role="button"] {
-        color: white !important;
+        color: #1a1538 !important;
         background-color: transparent !important;
         border-radius: 6px !important;
-        transition: background-color 0.2s !important;
+        font-weight: 500 !important;
+        transition: all 0.15s ease !important;
+        border: none !important;
     }
     
-    /* Hover state on day buttons */
     [data-baseweb="calendar"] [role="gridcell"] button:hover {
-        background-color: rgba(167,139,250,0.3) !important;
-        color: white !important;
+        background-color: #ede9fe !important;
+        color: #6d28d9 !important;
+        cursor: pointer !important;
     }
     
-    /* Selected date */
     [data-baseweb="calendar"] [aria-selected="true"],
     [data-baseweb="calendar"] [aria-pressed="true"] {
-        background-color: #a78bfa !important;
+        background-color: #7c3aed !important;
         color: white !important;
         font-weight: 700 !important;
     }
     
-    /* Today indicator */
     [data-baseweb="calendar"] [aria-current="date"] {
-        background-color: rgba(167,139,250,0.2) !important;
-        color: #c4b5fd !important;
+        background-color: #ede9fe !important;
+        color: #6d28d9 !important;
         border: 1px solid #a78bfa !important;
+        font-weight: 700 !important;
     }
     
-    /* Disabled dates (outside min/max) */
     [data-baseweb="calendar"] [aria-disabled="true"] {
-        color: rgba(255,255,255,0.2) !important;
+        color: #d1d5db !important;
         background-color: transparent !important;
+        cursor: not-allowed !important;
     }
     
-    /* Range selection (between start and end) */
     [data-baseweb="calendar"] [data-range-end="true"],
     [data-baseweb="calendar"] [data-range-start="true"] {
-        background-color: #a78bfa !important;
+        background-color: #7c3aed !important;
         color: white !important;
+        font-weight: 700 !important;
     }
     
     [data-baseweb="calendar"] [data-range="true"] {
-        background-color: rgba(167,139,250,0.25) !important;
-        color: white !important;
+        background-color: #ede9fe !important;
+        color: #1a1538 !important;
     }
     
-    /* Month/year header */
     [data-baseweb="calendar"] [role="heading"] {
-        color: white !important;
+        color: #1a1538 !important;
         font-weight: 700 !important;
-        font-size: 14px !important;
+        font-size: 15px !important;
     }
     
-    /* Navigation arrows (prev/next month) */
     [data-baseweb="calendar"] button[aria-label*="Previous"],
     [data-baseweb="calendar"] button[aria-label*="Next"] {
         background-color: transparent !important;
-        color: white !important;
+        color: #1a1538 !important;
         border-radius: 6px !important;
+        border: none !important;
     }
     
     [data-baseweb="calendar"] button[aria-label*="Previous"]:hover,
     [data-baseweb="calendar"] button[aria-label*="Next"]:hover {
-        background-color: rgba(167,139,250,0.3) !important;
+        background-color: #f3f4f6 !important;
     }
     
-    /* Navigation arrow SVG */
     [data-baseweb="calendar"] button svg {
-        fill: white !important;
+        fill: #1a1538 !important;
     }
     
-    /* Month/year dropdown selectors in calendar */
     [data-baseweb="calendar"] select,
     [data-baseweb="calendar"] [role="combobox"] {
-        background-color: rgba(255,255,255,0.1) !important;
-        color: white !important;
-        border: 1px solid rgba(255,255,255,0.2) !important;
+        background-color: white !important;
+        color: #1a1538 !important;
+        border: 1px solid #e5e7eb !important;
+        font-weight: 600 !important;
     }
     
     /* Center align dataframe content */
