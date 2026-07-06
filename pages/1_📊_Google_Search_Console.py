@@ -10,6 +10,7 @@ from lib.data_loader import (
     get_available_devices,
     get_available_sites,
     get_daily_timeseries,
+    get_gsc_country_breakdown,
     get_gsc_device_breakdown,
     get_gsc_device_kpis,
     get_gsc_totals_kpis,
@@ -196,30 +197,25 @@ st.subheader("🌍 Country Breakdown")
 if country and country != "_REST_OF_WORLD_":
     st.caption("💡 Country filter is active in sidebar. Change to 'All' to see full breakdown.")
 else:
-    st.caption("Top countries by clicks with comparison to previous period")
+    st.caption("✅ Country data matches GSC UI exactly (using gsc_by_country table)")
 
 with st.spinner("Loading country data..."):
-    # Get top countries for current period
-    current_countries_df = get_top_dimension(
-        "gsc_data",
-        "country",
+    # Get top countries for current period - use ACCURATE gsc_by_country table
+    # This matches GSC UI exactly (includes anonymized queries)
+    current_countries_df = get_gsc_country_breakdown(
         date_range.current.start,
         date_range.current.end,
-        limit=15,
-        device=device,
         site_url=selected_site,
+        limit=50,
     )
     
     previous_countries_df = pd.DataFrame()
     if date_range.comparison:
-        previous_countries_df = get_top_dimension(
-            "gsc_data",
-            "country",
+        previous_countries_df = get_gsc_country_breakdown(
             date_range.comparison.start,
             date_range.comparison.end,
-            limit=50,  # Get more to match against top 15 current
-            device=device,
             site_url=selected_site,
+            limit=100,  # Get more to match against top 15 current
         )
 
 # Country code to full name mapping (ISO 3166-1 alpha-3)

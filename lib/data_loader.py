@@ -371,6 +371,48 @@ def get_gsc_device_breakdown(start_date, end_date, site_url=None):
 
 
 @st.cache_data(ttl=600)
+@st.cache_data(ttl=3600, show_spinner='Loading country data...')
+def get_gsc_country_breakdown(start_date, end_date, site_url=None, limit=50):
+    """Get accurate country breakdown from gsc_by_country table - matches GSC UI exactly.
+    
+    Uses gsc_by_country (aggregated per country per day) which includes 
+    anonymized queries that GSC filters out at query-level.
+    """
+    client = get_bigquery_client()
+    params = [
+        bigquery.ScalarQueryParameter("start_date", "DATE", start_date),
+        bigquery.ScalarQueryParameter("end_date", "DATE", end_date),
+        bigquery.ScalarQueryParameter("limit", "INT64", limit),
+    ]
+    site_filter = ""
+    if site_url:
+        site_filter = "AND site_url = @site_url"
+        params.append(bigquery.ScalarQueryParameter("site_url", "STRING", site_url))
+
+    query = """
+    SELECT
+      country AS name,
+      SUM(clicks) AS clicks,
+      SUM(impressions) AS impressions,
+      SAFE_DIVIDE(SUM(clicks), SUM(impressions)) AS ctr,
+      SAFE_DIVIDE(SUM(position * impressions), SUM(impressions)) AS position
+    FROM `{p}.{d}.gsc_by_country`
+    WHERE date BETWEEN @start_date AND @end_date
+      AND country IS NOT NULL
+      AND country != ''
+    {site_filter}
+    GROUP BY country
+    ORDER BY clicks DESC
+    LIMIT @limit
+    """.format(p=PROJECT_ID, d=DATASET_ID, site_filter=site_filter)
+
+    job_config = bigquery.QueryJobConfig(query_parameters=params)
+    # Use fast direct fetch without storage client (small result set)
+    query_job = client.query(query, job_config=job_config)
+    results = query_job.result()  # Wait for query
+    return pd.DataFrame([dict(row) for row in results])
+
+
 def get_gsc_device_kpis(start_date, end_date, device, site_url=None):
     """Get KPIs filtered by device - uses gsc_by_device for accuracy."""
     client = get_bigquery_client()
